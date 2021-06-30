@@ -1,0 +1,80 @@
+import 'dart:io';
+void main()
+{
+
+print(' Enter a 13 Digit SA ID Number');
+  String idNum = stdin.readLineSync()!;
+  bool valid = isIDNumValid(idNum);
+  print(valid);
+  String gender = getGender(idNum);
+  print(gender);
+  String citizen = getCitizenship(idNum);
+  print(citizen);
+  String dob = getDateOfBirth(idNum);
+  print(dob);
+  displayIDNumParts(idNum);
+
+}
+bool isIDNumValid(String idNumber)
+{
+  if(idNumber.length == 13)
+  {
+   return true;
+  }
+   return false;
+}
+
+String getGender(String idNumber)
+{
+  if(isIDNumValid(idNumber))
+   {
+   var genderCode = idNumber.substring(6);
+   if(int.parse(genderCode)>5)
+   {
+   return "Male";
+   }
+   else
+   {
+   return "Female";
+   }
+   }
+   return "Invalid IDNum";
+   
+}
+String getCitizenship(String idNumber)
+{
+  if(isIDNumValid(idNumber))
+   {
+     var citizenship = int.parse(idNumber.substring(10,11));
+      if((citizenship)==0)
+     {
+       return "SA Citizen";
+     } 
+     else if(citizenship==1)
+     {
+       return "Permanent Resident";
+     } 
+     
+     else
+     {
+     return "Unknown";
+     }
+   
+   }
+   return "Invalid IDNum";
+}
+String getDateOfBirth(String idNumber)
+{
+ if(isIDNumValid(idNumber))
+   return idNumber.substring(0,6);
+   return "Invalid IDNum";
+}
+void displayIDNumParts(String Id_Number)
+{
+   print("Id Number : "+Id_Number);
+   print('Valid : ${isIDNumValid(Id_Number)}');
+   print("Gender : "+getGender(Id_Number));
+   print("Citizenship : "+getCitizenship(Id_Number));
+   print("Date of Birth : "+getDateOfBirth(Id_Number));
+}
+
